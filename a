@@ -1,0 +1,188 @@
+import tkinter as tk
+from tkinter import ttk
+root = tk.Tk()
+root.title("Student R")
+#Window Size
+root.geometry("500x600")
+#Window background color
+root.configure(bg="orange")
+name_label = tk.Label(root, text=" Name:", font=("Arial", 20), bg="#f0f8ff")
+name_label.grid(row=2, column=0, padx=10, pady=5, sticky="e")
+name_entry = tk.Entry(root, width=30)
+name_entry.grid(row=2, column=1, padx=10, pady=5)
+age_label = tk.Label(root, text="Age:", font=("Arial", 12), bg="#f0f8ff")
+age_label.grid(row=3, column=0, padx=10, pady=5, sticky="e")
+age_entry = tk.Entry(root, width=10)
+age_entry.grid(row=3, column=1, padx=10, pady=5, sticky="w")
+# Gender selection
+gender_label = tk.Label(root, text="Gender:", font=("Arial", 12), bg="#f0f8ff")
+gender_label.grid(row=4, column=0, padx=10, pady=5, sticky="e")
+gender_var = tk.StringVar(value="None")
+gender_male = tk.Radiobutton(root, text="Male", variable=gender_var,
+value="Male", bg="#f0f8ff")
+gender_male.grid(row=4, column=1, sticky="w")
+gender_female = tk.Radiobutton(root, text="Female", variable=gender_var,
+value="Female", bg="#f0f8ff")
+gender_female.grid(row=5, column=1, sticky="w")
+
+# Course selection
+course_label = tk.Label(root, text="Course:", font=("Arial", 12), bg="#f0f8ff")
+course_label.grid(row=6, column=0, padx=10, pady=5, sticky="e")
+course_var = ttk.Combobox(root, values=["Programming", "Web Development",
+"Networking"])
+course_var.grid(row=6, column=1, padx=10, pady=5)
+email_label = tk.Label(root, text="Email:", font=("Arial", 12), bg="#f0f8ff")
+email_label.grid(row=7, column=0, padx=10, pady=5, sticky="e")
+email_entry = tk.Entry(root, width=30)
+email_entry.grid(row=7, column=1, padx=10, pady=5)
+
+def submit_form():
+    name = name_entry.get()
+    age = age_entry.get()
+    gender = gender_var.get()
+    course = course_var.get()
+    email = email_entry.get()
+    with open("student.csv ", "a") as file:
+        file.write(f"{name}, {age}, {gender}, {course}, {email}\n")
+    result_label.config(text="Registration Successful!")
+submit_btn = tk.Button(root, text="Submit", font=("Arial", 12, "bold"),
+bg="#32CD32", fg="white", command=submit_form)
+submit_btn.grid(row=8, column=0, columnspan=2, pady=20)
+
+result_label = tk.Label(root, text="", font=("Arial", 12), fg="green",
+bg="#f0f8ff")
+result_label.grid(row=9, column=0, columnspan=2, pady=20)
+
+def clear_form():
+    name_entry.delete(0, tk.END)
+    age_entry.delete(0, tk.END)
+    gender_var.set("None")
+    course_var.set("")
+    email_entry.delete(0, tk.END)
+    result_label.config(text="")
+clear_btn = tk.Button(root, text="Clear", font=("Arial", 12, "bold"),
+bg="#FF4500", fg="white", command=clear_form)
+clear_btn.grid(row=10, column=0, columnspan=2, pady=10)
+
+
+view_window = tk.Tk()
+view_window.title("View Students")
+view_window.geometry("800x400")
+view_window.configure(bg="#f0f8ff")
+
+title_label = tk.Label(view_window, text="Registered Students", font=("Arial",
+16, "bold"), bg="#4682B4", fg="white")
+title_label.pack(pady=10, fill="x")
+
+columns = ("Name", "Age", "Gender", "Course", "Email")
+student_table = ttk.Treeview(view_window, columns=columns, show="headings")
+# Define column headings
+for col in columns:
+    student_table.heading(col, text=col)
+    student_table.column(col, width=100, anchor="center")
+student_table.pack(expand=True, fill="both", padx=10, pady=10)
+
+with open("student.csv", "r") as file:
+    students = file.readlines()
+for student in students:
+    student_data = student.strip().split(", ")
+    student_table.insert("", "end", values=student_data)
+
+
+
+root.mainloop()
+
+
+import tkinter as tk
+from tkinter import ttk
+root = tk.Tk()
+root.title("Student R")
+#Window Size
+root.geometry("500x600")
+#Window background color
+root.configure(bg="orange")
+name_label = tk.Label(root, text=" Name:", font=("Arial", 20), bg="#f0f8ff")
+name_label.grid(row=2, column=0, padx=10, pady=5, sticky="e")
+name_entry = tk.Entry(root, width=30)
+name_entry.grid(row=2, column=1, padx=10, pady=5)
+age_label = tk.Label(root, text="Age:", font=("Arial", 12), bg="#f0f8ff")
+age_label.grid(row=3, column=0, padx=10, pady=5, sticky="e")
+age_entry = tk.Entry(root, width=10)
+age_entry.grid(row=3, column=1, padx=10, pady=5, sticky="w")
+# Gender selection
+gender_label = tk.Label(root, text="Gender:", font=("Arial", 12), bg="#f0f8ff")
+gender_label.grid(row=4, column=0, padx=10, pady=5, sticky="e")
+gender_var = tk.StringVar(value="None")
+gender_male = tk.Radiobutton(root, text="Male", variable=gender_var,
+value="Male", bg="#f0f8ff")
+gender_male.grid(row=4, column=1, sticky="w")
+gender_female = tk.Radiobutton(root, text="Female", variable=gender_var,
+value="Female", bg="#f0f8ff")
+gender_female.grid(row=5, column=1, sticky="w")
+
+# Course selection
+course_label = tk.Label(root, text="Course:", font=("Arial", 12), bg="#f0f8ff")
+course_label.grid(row=6, column=0, padx=10, pady=5, sticky="e")
+course_var = ttk.Combobox(root, values=["Programming", "Web Development",
+"Networking"])
+course_var.grid(row=6, column=1, padx=10, pady=5)
+email_label = tk.Label(root, text="Email:", font=("Arial", 12), bg="#f0f8ff")
+email_label.grid(row=7, column=0, padx=10, pady=5, sticky="e")
+email_entry = tk.Entry(root, width=30)
+email_entry.grid(row=7, column=1, padx=10, pady=5)
+
+def submit_form():
+    name = name_entry.get()
+    age = age_entry.get()
+    gender = gender_var.get()
+    course = course_var.get()
+    email = email_entry.get()
+    with open("student.csv ", "a") as file:
+        file.write(f"{name}, {age}, {gender}, {course}, {email}\n")
+    result_label.config(text="Registration Successful!")
+submit_btn = tk.Button(root, text="Submit", font=("Arial", 12, "bold"),
+bg="#32CD32", fg="white", command=submit_form)
+submit_btn.grid(row=8, column=0, columnspan=2, pady=20)
+
+result_label = tk.Label(root, text="", font=("Arial", 12), fg="green",
+bg="#f0f8ff")
+result_label.grid(row=9, column=0, columnspan=2, pady=20)
+
+def clear_form():
+    name_entry.delete(0, tk.END)
+    age_entry.delete(0, tk.END)
+    gender_var.set("None")
+    course_var.set("")
+    email_entry.delete(0, tk.END)
+    result_label.config(text="")
+clear_btn = tk.Button(root, text="Clear", font=("Arial", 12, "bold"),
+bg="#FF4500", fg="white", command=clear_form)
+clear_btn.grid(row=10, column=0, columnspan=2, pady=10)
+
+
+view_window = tk.Tk()
+view_window.title("View Students")
+view_window.geometry("800x400")
+view_window.configure(bg="#f0f8ff")
+
+title_label = tk.Label(view_window, text="Registered Students", font=("Arial",
+16, "bold"), bg="#4682B4", fg="white")
+title_label.pack(pady=10, fill="x")
+
+columns = ("Name", "Age", "Gender", "Course", "Email")
+student_table = ttk.Treeview(view_window, columns=columns, show="headings")
+# Define column headings
+for col in columns:
+    student_table.heading(col, text=col)
+    student_table.column(col, width=100, anchor="center")
+student_table.pack(expand=True, fill="both", padx=10, pady=10)
+
+with open("student.csv", "r") as file:
+    students = file.readlines()
+for student in students:
+    student_data = student.strip().split(", ")
+    student_table.insert("", "end", values=student_data)
+
+
+
+root.mainloop()
