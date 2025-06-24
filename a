@@ -186,3 +186,47 @@ for student in students:
 
 
 root.mainloop()
+
+calculator
+
+
+import tkinter as tk 
+# Create main window 
+root = tk.Tk()
+root.title("Simple Calculator")
+root.geometry("300x200")
+root.configure(bg="#f0f0f0")
+
+# Entry fields 
+entry1 = tk.Entry(root, font=("Arial", 12), fg="black", bg="white")
+entry1.pack(pady=5)
+
+entry2 = tk.Entry(root, font=("Arial", 12), fg="black", bg="white")
+entry2.pack(pady=5)
+
+def add(): 
+    num1 = float(entry1.get()) 
+    num2 = float(entry2.get())
+    answer = num1 + num2 
+    result_label.config(text=f"Result: {answer}") 
+# Buttons 
+add_button = tk.Button(root, text="Add", font=("Arial", 12), fg="white", bg="green", command=add) 
+add_button.pack(pady=5)
+def subtract(): 
+    num1 = float(entry1.get()) 
+    num2 = float(entry2.get()) 
+    answer = num1 - num2 
+    result_label.config(text=f"Result: {answer}")
+subtract_button = tk.Button(root, text="Subtract", font=("Arial", 12),
+fg="white", bg="red", command=subtract) 
+subtract_button.pack(pady=5) 
+
+# Result label 
+result_label = tk.Label(root, text="Result:", font=("Arial", 12), 
+fg="blue", bg="#f0f0f0") 
+result_label.pack(pady=5) 
+# Run the application
+
+root.mainloop()
+
+
